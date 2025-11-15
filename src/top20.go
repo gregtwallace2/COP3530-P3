@@ -35,7 +35,7 @@ func top20Words(wordUseHashMap *hashmap.HashMap) {
 		it = it.Next()
 	}
 	tEnd := time.Now()
-	fmt.Printf("done in %d microseconds.\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// Print top 20 using the max heap
 	fmt.Printf("Most Used Words (from max heap):\n")
@@ -45,7 +45,7 @@ func top20Words(wordUseHashMap *hashmap.HashMap) {
 		fmt.Printf("%d) %s: %d\n", i+1, k, v)
 	}
 	tEnd = time.Now()
-	fmt.Printf("Max heap took %d microseconds to pop the top 20.\n\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("Max heap took %d nanoseconds to pop the top 20.\n\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// second option - insertion sort of an array
 	fmt.Print("Inserting word usage into an array ... ")
@@ -73,14 +73,14 @@ func top20Words(wordUseHashMap *hashmap.HashMap) {
 		i++
 	}
 	tEnd = time.Now()
-	fmt.Printf("done in %d microseconds.\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// performing insertion sort
 	fmt.Printf("Insertion sorting ... ")
 	tStart = time.Now()
 	insertionSort(&arr)
 	tEnd = time.Now()
-	fmt.Printf("done in %d microseconds.\n\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("done in %d nanoseconds.\n\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// Print top 20 using the array
 	fmt.Printf("Most Used Words (from insertion sort):\n")
@@ -89,5 +89,5 @@ func top20Words(wordUseHashMap *hashmap.HashMap) {
 		fmt.Printf("%d) %s: %d\n", i+1, arr[i].key, arr[i].value)
 	}
 	tEnd = time.Now()
-	fmt.Printf("Accessing sorted array took %d microseconds.\n\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("Accessing sorted array took %d nanoseconds.\n\n", tEnd.Sub(tStart).Nanoseconds())
 }

@@ -72,7 +72,7 @@ func loadData() (*hashmap.HashMap, error) {
 		}
 	}
 	tEnd := time.Now()
-	fmt.Printf("done in %d microseconds.\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 
 	fmt.Printf("Total unique words loaded: %d\n", hm.Size())
 	fmt.Print("(Words are case insensitive.)\n")
