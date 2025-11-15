@@ -24,13 +24,14 @@ func main() {
 	for {
 		fmt.Print("\nMain Menu:\n")
 		fmt.Print("1) Shakespeare's Top 20 Most Used Words\n")
+		fmt.Print("2) Search Word for Usage Count\n")
 		fmt.Print("0) Exit\n\n")
 
 		// user input
 		fmt.Print("Enter digit selection: ")
 		menuInput, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Printf("User Input Error: %s", err)
+			fmt.Printf("User Input Error: %s\n", err)
 			continue
 		}
 		// remove end line chars
@@ -44,6 +45,8 @@ func main() {
 			break
 		} else if menuInput == "1" {
 			top20Words(wordUseHashMap)
+		} else if menuInput == "2" {
+			searchWord(wordUseHashMap)
 		} else {
 			fmt.Print("Invalid selection. Try again.\n")
 		}
