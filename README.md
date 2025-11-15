@@ -40,4 +40,5 @@ Also, some functions are so fast, it appears they can't be accurately measured i
 ## Running the App
 
 Install [Go](https://go.dev/dl/) version 1.25.4 or newer. Clone this repo to your local disk. From the
-repo root, type `go run ./src`.
+repo root, type `go run ./src`. Alternatively, the app can be compiled into an executable using the
+command `go build ./src`.
