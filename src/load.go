@@ -55,7 +55,7 @@ func loadData() (*hashmap.HashMap, error) {
 	}
 
 	// count words by adding to hashmap
-	fmt.Printf("adding words to hash map...\n")
+	fmt.Printf("Adding words to hash map ... ")
 	tStart := time.Now()
 	hm := hashmap.NewHashMap(800000)
 	// allWords := map[string]uint64{}
@@ -72,19 +72,9 @@ func loadData() (*hashmap.HashMap, error) {
 		}
 	}
 	tEnd := time.Now()
-	fmt.Printf("...done in %d microseconds\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("done in %d microseconds.\n", tEnd.Sub(tStart).Microseconds())
 
-	// verify hash map is working right
-	// for k, v := range allWords {
-	// 	// fmt.Printf("%s: %d vs. %d\n", k, v, hm.GetValue(k))
-	// 	if v != hm.GetValue(k) {
-	// 		return fmt.Errorf("load: hash map data wrong (%s: %d vs %d)", k, v, hm.GetValue(k))
-	// 	}
-	// }
-	// if uint64(len(allWords)) != hm.Size() {
-	// 	return fmt.Errorf("load: hash map size is wrong (%d vs %d)", len(allWords), hm.Size())
-	// }
-	fmt.Printf("total words loaded: %d", hm.Size())
+	fmt.Printf("Total unique words loaded: %d\n", hm.Size())
 
 	return hm, nil
 }
