@@ -29,7 +29,7 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 	tStart := time.Now()
 	count := wordUseHashMap.GetValue(wordInput)
 	tEnd := time.Now()
-	fmt.Printf("done in %d microseconds.\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 	fmt.Printf("%s used %d times.\n", wordInput, count)
 
 	// search word method #2
@@ -51,7 +51,15 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 		it = it.Next()
 	}
 	tEnd = time.Now()
-	fmt.Printf("done in %d microseconds.\n", tEnd.Sub(tStart).Microseconds())
+	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+
+	// search method #2
+	fmt.Print("\nGetting word usage from binary search tree ... ")
+	tStart = time.Now()
+	count = bst.Search(wordInput)
+	tEnd = time.Now()
+	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+	fmt.Printf("%s used %d times.\n", wordInput, count)
 
 	fmt.Print("\n")
 }

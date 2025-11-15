@@ -60,3 +60,41 @@ func (bst *BinarySearchTree) Insert(key string, value uint64) {
 		}
 	}
 }
+
+// Search finds the specified key in the bst and returns the value associated
+// with it
+func (bst *BinarySearchTree) Search(key string) uint64 {
+	// empty tree
+	if bst.head == nil {
+		return 0
+	}
+
+	// search nodes
+	currentNode := bst.head
+	for {
+		// found the right node
+		if currentNode.key == key {
+			return currentNode.value
+		}
+
+		// navigate to next node
+		if key < currentNode.key {
+			if currentNode.left == nil {
+				// not found
+				break
+			}
+
+			currentNode = currentNode.left
+		} else {
+			if currentNode.right == nil {
+				// not found
+				break
+			}
+
+			currentNode = currentNode.right
+		}
+	}
+
+	// not found
+	return 0
+}
