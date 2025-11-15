@@ -23,7 +23,7 @@ func main() {
 
 	for {
 		fmt.Print("\nMain Menu:\n")
-		fmt.Print("1) Shakespeare's Top 10 Most Used Words\n")
+		fmt.Print("1) Shakespeare's Top 20 Most Used Words\n")
 		fmt.Print("0) Exit\n\n")
 
 		// user input
@@ -43,7 +43,7 @@ func main() {
 		if menuInput == "0" {
 			break
 		} else if menuInput == "1" {
-			top10Words(wordUseHashMap)
+			top20Words(wordUseHashMap)
 		} else {
 			fmt.Print("Invalid selection. Try again.\n")
 		}
