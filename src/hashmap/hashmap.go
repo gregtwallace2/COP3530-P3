@@ -5,8 +5,6 @@ const (
 	fnvPrime       = uint64(1099511628211)
 )
 
-// var collisions = 0
-
 // hashFunc is the hashing function for the hash map (FNV-1a hash)
 func hashFunc(key string, capacity uint64) uint64 {
 	h := fnvOffsetBasis
@@ -82,8 +80,6 @@ func (hm *HashMap) Increase(key string) {
 
 	// if indx existed, but ran out of nodes, add new node
 	if n != nil {
-		// collisions++
-		// fmt.Printf("collissions: %d", collisions)
 		n.next = newNode
 	} else {
 		// indx didn't exist
