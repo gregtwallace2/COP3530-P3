@@ -13,7 +13,7 @@ func main() {
 	fmt.Printf("Starting...\n")
 
 	// load the word data into the hashmap
-	_, err := loadData()
+	wordUseHashMap, err := loadData()
 	if err != nil {
 		log.Println(err)
 		os.Exit(-1)
@@ -23,6 +23,7 @@ func main() {
 
 	for {
 		fmt.Print("\nMain Menu:\n")
+		fmt.Print("1) Shakespeare's Top 10 Most Used Words\n")
 		fmt.Print("0) Exit\n\n")
 
 		// user input
@@ -41,6 +42,8 @@ func main() {
 		// do user request
 		if menuInput == "0" {
 			break
+		} else if menuInput == "1" {
+			top10Words(wordUseHashMap)
 		} else {
 			fmt.Print("Invalid selection. Try again.\n")
 		}
