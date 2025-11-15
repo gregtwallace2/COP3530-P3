@@ -12,7 +12,7 @@ import (
 
 func searchWord(wordUseHashMap *hashmap.HashMap) {
 	// user input
-	fmt.Print("\nWhat word do you want to search? ")
+	fmt.Print("\nWhat word do you want to search (case insensitive)? ")
 
 	reader := bufio.NewReader(os.Stdin)
 	wordInput, err := reader.ReadString('\n')
@@ -23,6 +23,9 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 	// remove end line chars
 	wordInput = strings.Trim(wordInput, string(byte(10))) // LF
 	wordInput = strings.Trim(wordInput, string(byte(13))) // CR
+
+	// make word lowercase
+	wordInput = strings.ToLower(wordInput)
 
 	// search word method #1
 	fmt.Print("\nGetting word usage from hash map ... ")
