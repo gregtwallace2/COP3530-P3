@@ -1,7 +1,16 @@
 package main
 
-import "log"
+import (
+	"log"
+	"os"
+)
 
 func main() {
-	log.Println("Test...")
+	// load the word data into the hashmap
+	_, err := loadData()
+	if err != nil {
+		log.Println(err)
+		os.Exit(-1)
+	}
+
 }
