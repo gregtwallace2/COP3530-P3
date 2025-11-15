@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+// searchWord allows the user to specify a word to search for and then outputs
+// the number of times Shakespeare used that word
 func searchWord(wordUseHashMap *hashmap.HashMap) {
 	// user input
 	fmt.Print("\nWhat word do you want to search (case insensitive)? ")
