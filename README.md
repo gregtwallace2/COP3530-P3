@@ -15,9 +15,9 @@ quantity of times the word is used in all of Shakespeare's works.)
 
 After which, the main menu loads and offers two functions:
 
-### Shakespeare's Top 20 Most Used Words
+### Shakespeare's Top 50 Most Used Words
 
-Function 1 produces a list of the top 20 most used words. The functionality is timed and offers a comparison
+Function 1 produces a list of the top 50 most used words. The functionality is timed and offers a comparison
 between loading the words from the hash map into a max heap (non-trivial struct 2) and loading the words into
 a regular array and then using insertion sort to sort the values.
 

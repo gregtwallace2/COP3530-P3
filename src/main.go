@@ -23,7 +23,7 @@ func main() {
 
 	for {
 		fmt.Print("\nMain Menu:\n")
-		fmt.Print("1) Shakespeare's Top 20 Most Used Words\n")
+		fmt.Print("1) Shakespeare's Top 50 Most Used Words\n")
 		fmt.Print("2) Search Word for Usage Count\n")
 		fmt.Print("0) Exit\n\n")
 
@@ -44,7 +44,7 @@ func main() {
 		if menuInput == "0" {
 			break
 		} else if menuInput == "1" {
-			top20Words(wordUseHashMap)
+			top50Words(wordUseHashMap)
 		} else if menuInput == "2" {
 			searchWord(wordUseHashMap)
 		} else {

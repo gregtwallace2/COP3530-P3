@@ -12,9 +12,9 @@ type pair struct {
 	value uint64
 }
 
-// top20Words finds the 20 most used words and prints them using 2 different methods;
+// top50Words finds the 50 most used words and prints them using 2 different methods;
 // time elapsed for various steps is also printed
-func top20Words(wordUseHashMap *hashmap.HashMap) {
+func top50Words(wordUseHashMap *hashmap.HashMap) {
 	fmt.Print("Inserting word usage into max heap ... ")
 
 	// make heap
@@ -37,15 +37,15 @@ func top20Words(wordUseHashMap *hashmap.HashMap) {
 	tEnd := time.Now()
 	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 
-	// Print top 20 using the max heap
+	// Print top 50 using the max heap
 	fmt.Printf("Most Used Words (from max heap):\n")
 	tStart = time.Now()
-	for i := range 20 {
+	for i := range 50 {
 		k, v := mh.Pop()
 		fmt.Printf("%d) %s: %d\n", i+1, k, v)
 	}
 	tEnd = time.Now()
-	fmt.Printf("Max heap took %d nanoseconds to pop the top 20.\n\n", tEnd.Sub(tStart).Nanoseconds())
+	fmt.Printf("Max heap took %d nanoseconds to pop the top 50.\n\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// second option - insertion sort of an array
 	fmt.Print("Inserting word usage into an array ... ")
@@ -82,10 +82,10 @@ func top20Words(wordUseHashMap *hashmap.HashMap) {
 	tEnd = time.Now()
 	fmt.Printf("done in %d nanoseconds.\n\n", tEnd.Sub(tStart).Nanoseconds())
 
-	// Print top 20 using the array
+	// Print top 50 using the array
 	fmt.Printf("Most Used Words (from insertion sort):\n")
 	tStart = time.Now()
-	for i := range 20 {
+	for i := range 50 {
 		fmt.Printf("%d) %s: %d\n", i+1, arr[i].key, arr[i].value)
 	}
 	tEnd = time.Now()
