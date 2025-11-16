@@ -29,11 +29,15 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 	// make word lowercase
 	wordInput = strings.ToLower(wordInput)
 
+	var totalHashMap time.Duration
+	var totalBST time.Duration
+
 	// search word method #1
 	fmt.Print("\nGetting word usage from hash map ... ")
 	tStart := time.Now()
 	count := wordUseHashMap.GetValue(wordInput)
 	tEnd := time.Now()
+	totalHashMap = tEnd.Sub(tStart)
 	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 	fmt.Printf("%s used %d times.\n", wordInput, count)
 
@@ -63,8 +67,18 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 	tStart = time.Now()
 	count = bst.Search(wordInput)
 	tEnd = time.Now()
+	totalBST = tEnd.Sub(tStart)
 	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 	fmt.Printf("%s used %d times.\n", wordInput, count)
 
 	fmt.Print("\n")
+
+	// Note: Time adding to the BST is deliberately excluded from below to compare search times only
+
+	// show comparison faster/slower
+	if totalHashMap < totalBST {
+		fmt.Printf("Hash map was faster searching than binary search tree (map: %d vs bst: %d nanoseconds).\n\n", totalHashMap, totalBST)
+	} else {
+		fmt.Printf("Binary search tree was faster searchingthan hash map (map: %d vs bst: %d nanoseconds).\n\n", totalHashMap, totalBST)
+	}
 }

@@ -17,6 +17,9 @@ type pair struct {
 func top50Words(wordUseHashMap *hashmap.HashMap) {
 	fmt.Print("Inserting word usage into max heap ... ")
 
+	var totalHeap time.Duration
+	var totalSort time.Duration
+
 	// make heap
 	mh := maxheap.NewMaxHeap(27000)
 
@@ -35,6 +38,7 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 		it = it.Next()
 	}
 	tEnd := time.Now()
+	totalHeap = tEnd.Sub(tStart)
 	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// Print top 50 using the max heap
@@ -45,6 +49,7 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 		fmt.Printf("%d) %s: %d\n", i+1, k, v)
 	}
 	tEnd = time.Now()
+	totalHeap += tEnd.Sub(tStart)
 	fmt.Printf("Max heap took %d nanoseconds to pop the top 50.\n\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// second option - insertion sort of an array
@@ -73,6 +78,7 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 		i++
 	}
 	tEnd = time.Now()
+	totalSort = tEnd.Sub(tStart)
 	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// performing insertion sort
@@ -80,6 +86,7 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 	tStart = time.Now()
 	insertionSort(&arr)
 	tEnd = time.Now()
+	totalSort += tEnd.Sub(tStart)
 	fmt.Printf("done in %d nanoseconds.\n\n", tEnd.Sub(tStart).Nanoseconds())
 
 	// Print top 50 using the array
@@ -90,4 +97,12 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 	}
 	tEnd = time.Now()
 	fmt.Printf("Accessing sorted array took %d nanoseconds.\n\n", tEnd.Sub(tStart).Nanoseconds())
+
+	// show comparison faster/slower
+	if totalHeap < totalSort {
+		fmt.Printf("Max heap was faster than sort (heap: %d vs sort: %d nanoseconds).\n\n", totalHeap, totalSort)
+	} else {
+		// should never be the case though
+		fmt.Printf("Sort was faster than max heap (heap: %d vs sort: %d nanoseconds).\n\n", totalHeap, totalSort)
+	}
 }
