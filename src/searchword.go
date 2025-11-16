@@ -8,6 +8,8 @@ import (
 	"project3/src/hashmap"
 	"strings"
 	"time"
+
+	"github.com/loov/hrtime"
 )
 
 // searchWord allows the user to specify a word to search for and then outputs
@@ -34,11 +36,11 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 
 	// search word method #1
 	fmt.Print("\nGetting word usage from hash map ... ")
-	tStart := time.Now()
+	tStart := hrtime.Now()
 	count := wordUseHashMap.GetValue(wordInput)
-	tEnd := time.Now()
-	totalHashMap = tEnd.Sub(tStart)
-	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd := hrtime.Now()
+	totalHashMap = tEnd - tStart
+	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
 	fmt.Printf("%s used %d times.\n", wordInput, count)
 
 	// search word method #2
@@ -46,7 +48,7 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 	bst := binarysearchtree.NewBinarySearchTree()
 
 	it := wordUseHashMap.Begin()
-	tStart = time.Now()
+	tStart = hrtime.Now()
 	for {
 		// hit end, done adding
 		if it == wordUseHashMap.End() {
@@ -59,16 +61,16 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 		// advance iterator
 		it = it.Next()
 	}
-	tEnd = time.Now()
-	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd = hrtime.Now()
+	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
 
 	// search method #2
 	fmt.Print("\nGetting word usage from binary search tree ... ")
-	tStart = time.Now()
+	tStart = hrtime.Now()
 	count = bst.Search(wordInput)
-	tEnd = time.Now()
-	totalBST = tEnd.Sub(tStart)
-	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd = hrtime.Now()
+	totalBST = tEnd - tStart
+	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
 	fmt.Printf("%s used %d times.\n", wordInput, count)
 
 	fmt.Print("\n")

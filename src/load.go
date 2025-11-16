@@ -6,8 +6,9 @@ import (
 	"os"
 	"project3/src/hashmap"
 	"strings"
-	"time"
 	"unicode"
+
+	"github.com/loov/hrtime"
 )
 
 type shakespeareWork struct {
@@ -56,7 +57,7 @@ func loadData() (*hashmap.HashMap, error) {
 
 	// count words by adding to hashmap
 	fmt.Printf("Adding words to hash map ... ")
-	tStart := time.Now()
+	tStart := hrtime.Now()
 	hm := hashmap.NewHashMap(800000)
 	// allWords := map[string]uint64{}
 
@@ -71,8 +72,8 @@ func loadData() (*hashmap.HashMap, error) {
 			hm.Increase(lowerWord)
 		}
 	}
-	tEnd := time.Now()
-	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd := hrtime.Now()
+	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
 
 	fmt.Printf("Total unique words loaded: %d\n", hm.Size())
 	fmt.Print("(Words are case insensitive.)\n")

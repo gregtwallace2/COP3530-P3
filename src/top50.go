@@ -5,6 +5,8 @@ import (
 	"project3/src/hashmap"
 	"project3/src/maxheap"
 	"time"
+
+	"github.com/loov/hrtime"
 )
 
 type pair struct {
@@ -24,7 +26,7 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 	mh := maxheap.NewMaxHeap(27000)
 
 	it := wordUseHashMap.Begin()
-	tStart := time.Now()
+	tStart := hrtime.Now()
 	for {
 		// hit end, done adding
 		if it == wordUseHashMap.End() {
@@ -37,27 +39,27 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 		// advance iterator
 		it = it.Next()
 	}
-	tEnd := time.Now()
-	totalHeap = tEnd.Sub(tStart)
-	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd := hrtime.Now()
+	totalHeap = tEnd - tStart
+	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
 
 	// Print top 50 using the max heap
 	fmt.Printf("Most Used Words (from max heap):\n")
-	tStart = time.Now()
+	tStart = hrtime.Now()
 	for i := range 50 {
 		k, v := mh.Pop()
 		fmt.Printf("%d) %s: %d\n", i+1, k, v)
 	}
-	tEnd = time.Now()
-	totalHeap += tEnd.Sub(tStart)
-	fmt.Printf("Max heap took %d nanoseconds to pop the top 50.\n\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd = hrtime.Now()
+	totalHeap += (tEnd - tStart)
+	fmt.Printf("Max heap took %d nanoseconds to pop the top 50.\n\n", (tEnd - tStart).Nanoseconds())
 
 	// second option - insertion sort of an array
 	fmt.Print("Inserting word usage into an array ... ")
 	arr := make([]pair, wordUseHashMap.Size())
 
 	it = wordUseHashMap.Begin()
-	tStart = time.Now()
+	tStart = hrtime.Now()
 	i := 0
 	for {
 		// hit end, done adding
@@ -77,26 +79,26 @@ func top50Words(wordUseHashMap *hashmap.HashMap) {
 		it = it.Next()
 		i++
 	}
-	tEnd = time.Now()
-	totalSort = tEnd.Sub(tStart)
-	fmt.Printf("done in %d nanoseconds.\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd = hrtime.Now()
+	totalSort = (tEnd - tStart)
+	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
 
 	// performing insertion sort
 	fmt.Printf("Insertion sorting ... ")
-	tStart = time.Now()
+	tStart = hrtime.Now()
 	insertionSort(&arr)
-	tEnd = time.Now()
-	totalSort += tEnd.Sub(tStart)
-	fmt.Printf("done in %d nanoseconds.\n\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd = hrtime.Now()
+	totalSort += (tEnd - tStart)
+	fmt.Printf("done in %d nanoseconds.\n\n", (tEnd - tStart).Nanoseconds())
 
 	// Print top 50 using the array
 	fmt.Printf("Most Used Words (from insertion sort):\n")
-	tStart = time.Now()
+	tStart = hrtime.Now()
 	for i := range 50 {
 		fmt.Printf("%d) %s: %d\n", i+1, arr[i].key, arr[i].value)
 	}
-	tEnd = time.Now()
-	fmt.Printf("Accessing sorted array took %d nanoseconds.\n\n", tEnd.Sub(tStart).Nanoseconds())
+	tEnd = hrtime.Now()
+	fmt.Printf("Accessing sorted array took %d nanoseconds.\n\n", (tEnd - tStart).Nanoseconds())
 
 	// show comparison faster/slower
 	if totalHeap < totalSort {
