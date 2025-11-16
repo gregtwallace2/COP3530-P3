@@ -10,7 +10,6 @@ import (
 
 func main() {
 	fmt.Print("\nShakespeare’s Undying Love (of Words)\n\n")
-	fmt.Printf("Starting...\n")
 
 	// load the word data into the hashmap
 	wordUseHashMap, err := loadData()
@@ -45,9 +44,9 @@ func main() {
 		if menuInput == "0" {
 			break
 		} else if menuInput == "1" {
-			top50Words(wordUseHashMap)
+			topWords(wordUseHashMap, 50)
 		} else if menuInput == "2" {
-			topAllWords(wordUseHashMap)
+			topWords(wordUseHashMap, wordUseHashMap.Size())
 		} else if menuInput == "3" {
 			searchWord(wordUseHashMap)
 		} else {

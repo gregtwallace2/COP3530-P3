@@ -7,7 +7,6 @@ import (
 	"project3/src/binarysearchtree"
 	"project3/src/hashmap"
 	"strings"
-	"time"
 
 	"github.com/loov/hrtime"
 )
@@ -31,24 +30,23 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 	// make word lowercase
 	wordInput = strings.ToLower(wordInput)
 
-	var totalHashMap time.Duration
-	var totalBST time.Duration
-
 	// search word method #1
 	fmt.Print("\nGetting word usage from hash map ... ")
-	tStart := hrtime.Now()
-	count := wordUseHashMap.GetValue(wordInput)
-	tEnd := hrtime.Now()
-	totalHashMap = tEnd - tStart
-	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
-	fmt.Printf("%s used %d times.\n", wordInput, count)
+	timeStart := hrtime.Now()
+	wordCount := wordUseHashMap.GetValue(wordInput)
+	timeEnd := hrtime.Now()
+	timeHashMap := timeEnd - timeStart
+	fmt.Printf("done in %d nanoseconds.\n", (timeEnd - timeStart).Nanoseconds())
+	fmt.Printf("%s used %d times.\n", wordInput, wordCount)
 
 	// search word method #2
 	fmt.Print("\nInserting word usage into binary search tree ... ")
+
+	timeStart = hrtime.Now()
 	bst := binarysearchtree.NewBinarySearchTree()
 
 	it := wordUseHashMap.Begin()
-	tStart = hrtime.Now()
+
 	for {
 		// hit end, done adding
 		if it == wordUseHashMap.End() {
@@ -61,26 +59,28 @@ func searchWord(wordUseHashMap *hashmap.HashMap) {
 		// advance iterator
 		it = it.Next()
 	}
-	tEnd = hrtime.Now()
-	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
+	timeEnd = hrtime.Now()
+	fmt.Printf("done in %d nanoseconds.\n", (timeEnd - timeStart).Nanoseconds())
 
 	// search method #2
 	fmt.Print("\nGetting word usage from binary search tree ... ")
-	tStart = hrtime.Now()
-	count = bst.Search(wordInput)
-	tEnd = hrtime.Now()
-	totalBST = tEnd - tStart
-	fmt.Printf("done in %d nanoseconds.\n", (tEnd - tStart).Nanoseconds())
-	fmt.Printf("%s used %d times.\n", wordInput, count)
+	timeStart = hrtime.Now()
+	wordCount = bst.Search(wordInput)
+	timeEnd = hrtime.Now()
+	timeBST := timeEnd - timeStart
+	fmt.Printf("done in %d nanoseconds.\n", (timeEnd - timeStart).Nanoseconds())
+	fmt.Printf("%s used %d times.\n", wordInput, wordCount)
 
 	fmt.Print("\n")
 
-	// Note: Time adding to the BST is deliberately excluded from below to compare search times only
-
 	// show comparison faster/slower
-	if totalHashMap < totalBST {
-		fmt.Printf("Hash map was faster searching than binary search tree (map: %d vs bst: %d nanoseconds).\n\n", totalHashMap, totalBST)
+	if timeHashMap == timeBST {
+		fmt.Printf("Hash map search was roughly comparable to binary tree search (%d nanoseconds).\n\n", timeHashMap)
+	} else if timeHashMap < timeBST {
+		fmt.Printf("Hash map search was %.2f times faster than binary tree search (map: %d vs bst: %d nanoseconds).\n\n",
+			float64(timeBST)/float64(timeHashMap), timeHashMap, timeBST)
 	} else {
-		fmt.Printf("Binary search tree was faster searchingthan hash map (map: %d vs bst: %d nanoseconds).\n\n", totalHashMap, totalBST)
+		fmt.Printf("Binary tree search search was %.2f times faster than hash map search (map: %d vs bst: %d nanoseconds).\n\n",
+			float64(timeHashMap)/float64(timeBST), timeHashMap, timeBST)
 	}
 }
