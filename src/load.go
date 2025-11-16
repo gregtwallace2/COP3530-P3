@@ -59,7 +59,6 @@ func loadData() (*hashmap.HashMap, error) {
 	fmt.Printf("Adding words to hash map ... ")
 	tStart := hrtime.Now()
 	hm := hashmap.NewHashMap(hashMapCap)
-	// allWords := map[string]uint64{}
 
 	// for each work
 	for i := range data {
@@ -68,7 +67,6 @@ func loadData() (*hashmap.HashMap, error) {
 
 		for j := range textWords {
 			lowerWord := strings.ToLower(textWords[j])
-			// allWords[lowerWord] += 1
 			hm.Increase(lowerWord)
 		}
 	}
