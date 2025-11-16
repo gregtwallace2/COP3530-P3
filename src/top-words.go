@@ -19,7 +19,7 @@ func topWords(wordUseHashMap *hashmap.HashMap, topX uint64) {
 
 	// make heap
 	timeStart := hrtime.Now()
-	mh := maxheap.NewMaxHeap(27000)
+	mh := maxheap.NewMaxHeap(wordUseHashMap.Size())
 
 	it := wordUseHashMap.Begin()
 	for {
