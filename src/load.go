@@ -58,7 +58,7 @@ func loadData() (*hashmap.HashMap, error) {
 	// count words by adding to hashmap
 	fmt.Printf("Adding words to hash map ... ")
 	tStart := hrtime.Now()
-	hm := hashmap.NewHashMap(800000)
+	hm := hashmap.NewHashMap(hashMapCap)
 	// allWords := map[string]uint64{}
 
 	// for each work

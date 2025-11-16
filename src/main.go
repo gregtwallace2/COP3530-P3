@@ -8,6 +8,11 @@ import (
 	"strings"
 )
 
+// hashMapCap sets the hash map's bucket size; can tweak this const to
+// evaluate performance impact
+const hashMapCap = 800000
+
+// main app & app loop
 func main() {
 	fmt.Print("\nShakespeare’s Undying Love (of Words)\n\n")
 
