@@ -6,24 +6,28 @@ A straightforward program to examine word usage within Shakespeare’s works. Th
 ## Program Functions
 
 When the program starts, it parses the json data set (~800,000 words) containing all of Shakespeare's works
-and counts the use of each word. Punctuation is generally ignored, the apostrophes are assumed to be
-part of words. Given some oddities in formatting in the data set, there is some room for cleanup here.
+and counts the use of each word. Punctuation is generally ignored, the apostrophes and hyphens are assumed
+to be part of words. Given some oddities in formatting in the data set, there is some room for cleanup here.
 
 After the json data is parsed, individual words are loaded into a hash map (non-trivial struct 1) which
 is used to effectively count the number of times each word is used. (The hash map maps words as keys to a
 quantity of times the word is used in all of Shakespeare's works.)
 
-After which, the main menu loads and offers two functions:
+After which, the main menu loads and offers three functions:
 
-### Shakespeare's Top 50 Most Used Words
+### Top 50 Most Used Words
 
 Function 1 produces a list of the top 50 most used words. The functionality is timed and offers a comparison
 between loading the words from the hash map into a max heap (non-trivial struct 2) and loading the words into
 a regular array and then using insertion sort to sort the values.
 
+### All Words In Order
+
+Function 2 is the same function as function 1, but lists all words instead of just the top 50.
+
 ### Search Word for Usage Count
 
-Function 2 allows the user to specify a word to search for and tells the user how many times Shakespeare
+Function 3 allows the user to specify a word to search for and tells the user how many times Shakespeare
 used that word. It provides a timing comparison between directly fetching the value from the hash map
 and using the hash map to build a binary search tree and then fetching the answer from the binary search
 tree.
@@ -34,8 +38,8 @@ Of course, building additional data structures adds time. I tried to separate th
 from actual functions like searching or popping in order to more accurately have an apples to apples
 comparison of times for similar functions.
 
-Also, some functions are so fast, it appears they can't be accurately measured in go (results show 
-0 nanoseconds). Additional work would need to be done if ultra high accuracy timing measurements were needed.
+Also, Go isn't known for having the most timing precision in its standard library. Therefore, a third party
+timing library was used to get more accurate time measurements.
 
 ## Running the App
 
